@@ -415,6 +415,10 @@ resource "aws_lb_listener_rule" "https_listener_rule" {
     var.https_listener_rules_tags,
     lookup(var.https_listener_rules[count.index], "tags", {}),
   )
+
+  lifecycle {
+    ignore_changes = [action[0].target_group_arn]
+  }
 }
 
 resource "aws_lb_listener_rule" "http_tcp_listener_rule" {
@@ -755,6 +759,10 @@ resource "aws_lb_listener" "frontend_https" {
     var.https_listeners_tags,
     lookup(var.https_listeners[count.index], "tags", {}),
   )
+
+  lifecycle {
+    ignore_changes = [default_action[0].target_group_arn]
+  }
 }
 
 resource "aws_lb_listener_certificate" "https_listener" {
