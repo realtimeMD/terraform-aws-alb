@@ -5,6 +5,7 @@ module "wrapper" {
 
   create_lb                        = try(each.value.create_lb, var.defaults.create_lb, true)
   drop_invalid_header_fields       = try(each.value.drop_invalid_header_fields, var.defaults.drop_invalid_header_fields, false)
+  preserve_host_header             = try(each.value.preserve_host_header, var.defaults.preserve_host_header, false)
   enable_deletion_protection       = try(each.value.enable_deletion_protection, var.defaults.enable_deletion_protection, false)
   enable_http2                     = try(each.value.enable_http2, var.defaults.enable_http2, true)
   enable_cross_zone_load_balancing = try(each.value.enable_cross_zone_load_balancing, var.defaults.enable_cross_zone_load_balancing, false)
@@ -39,4 +40,10 @@ module "wrapper" {
   enable_waf_fail_open             = try(each.value.enable_waf_fail_open, var.defaults.enable_waf_fail_open, false)
   desync_mitigation_mode           = try(each.value.desync_mitigation_mode, var.defaults.desync_mitigation_mode, "defensive")
   putin_khuylo                     = try(each.value.putin_khuylo, var.defaults.putin_khuylo, true)
+  create_security_group            = try(each.value.create_security_group, var.defaults.create_security_group, true)
+  security_group_name              = try(each.value.security_group_name, var.defaults.security_group_name, null)
+  security_group_use_name_prefix   = try(each.value.security_group_use_name_prefix, var.defaults.security_group_use_name_prefix, true)
+  security_group_description       = try(each.value.security_group_description, var.defaults.security_group_description, null)
+  security_group_rules             = try(each.value.security_group_rules, var.defaults.security_group_rules, {})
+  security_group_tags              = try(each.value.security_group_tags, var.defaults.security_group_tags, {})
 }
