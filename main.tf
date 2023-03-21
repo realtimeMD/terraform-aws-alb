@@ -421,7 +421,7 @@ resource "aws_lb_listener_rule" "https_listener_rule" {
   lifecycle {
     ignore_changes = [
       action[0].target_group_arn,
-      action[0].forward[0].target_group
+      action[0].forward
     ]
   }
 }
